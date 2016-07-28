@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/themes/pkgo.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+
+	<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="js/database.js"></script>
+
+    <title>Pokemon PL</title>
+</head>
+
+<body>
+    <div class="app">
+        <!-- #HOME -->
+        <div data-role="page" id="home">
+            <!-- <div data-role="header" data-position="fixed"> -->
+			<div data-role="header">
+                <h1>Pokemon base</h1>
+				<div data-role="navbar">
+    				<ul>
+    					<li><a href="#unaevol" data-icon="navigation" class="ui-alt-icon ui-nodisc-icon">Una evoluzione</a></li>
+    					<li><a href="#dueevol" data-icon="star" class="ui-alt-icon ui-nodisc-icon">Due evoluzioni</a></li>
+    				</ul>
+				</div>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                <img class="logo" src="img/pkgo-logo.png">
+
+				<form id="select-base" method="post">
+					<div class="ui-field-contain ui-alt-icon ui-nodisc-icon">
+						<select name="pokemon" id="pokeselect">
+							<option value="0">-- Seleziona un animaletto --</option>
+							<!-- qui viene popolato in base ai dati del db -->
+						</select>
+					</div>
+				</form>
+
+				<form id="dati" method="post">
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="plbase">PL base:</label>
+							<input type="number" name="plbase" id="plbase" disabled="true">
+						</div>
+						<div class="ui-block-b">
+    						<label for="pl">PL iniziali:</label>
+							<input type="number" name="pl" id="pl">
+						</div>
+					</div>
+					<label for="livelli">Numero livelli</label>
+    				<div data-role="controlgroup" data-type="horizontal" id="livgroup">
+						<div class="ui-btn ui-icon-minus ui-btn-icon-notext ui-first-child ui-alt-icon ui-nodisc-icon" id="subliv">&nbsp;</div>
+						<div class="ui-input-text ui-shadow-inset ui-btn contatore">
+							<input type="number" data-role="spinbox" name="livelli" id="livelli" data-options="{&quot;type&quot;:&quot;horizontal&quot;}" value="0" min="0" max="100" disabled="true">
+						</div>
+        				<div class="ui-btn ui-icon-plus ui-btn-icon-notext ui-last-child ui-alt-icon ui-nodisc-icon" id="addliv">&nbsp;</div>
+    				</div>
+
+					<h1>Punti lotta finali</h1>
+					<div class="ui-grid-solo risultato">
+						<div class="ui-block-a">
+							<label for="potevo">Potenziamento:</label>
+							<input type="number" name="potevo" id="potevo" disabled="true">
+						</div>
+					</div>
+
+        		</form>
+
+            </div> <!-- fine data-role="main" -->
+
+            <div data-role="footer">
+                <h1>Praise the Sun!</h1>
+            </div>
+        </div> <!-- fine home -->
+
+<!-- ===================================================================================================== -->
+
+		<div data-role="page" id="unaevol">
+            <!-- <div data-role="header" data-position="fixed"> -->
+			<div data-role="header">
+                <h1>Una evoluzione</h1>
+				<div data-role="navbar">
+    				<ul>
+    					<li><a href="#home" data-icon="home" class="ui-alt-icon ui-nodisc-icon">Pokemon Base</a></li>
+    					<li><a href="#dueevol" data-icon="star" class="ui-alt-icon ui-nodisc-icon">Due evoluzioni</a></li>
+    				</ul>
+				</div>
+            </div>
+
+			<div data-role="main" class="ui-content">
+                <img class="logo" src="img/pkgo-logo.png">
+
+				<form id="select-uno" method="post">
+					<div class="ui-field-contain ui-alt-icon ui-nodisc-icon">
+						<select name="pokemon1" id="pokeselect1">
+							<option value="0">-- Seleziona un animaletto --</option>
+							<!-- qui viene popolato in base ai dati del db -->
+						</select>
+					</div>
+				</form>
+
+				<form id="dati1" method="post">
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="plbase1">PL base:</label>
+							<input type="number" name="plbase1" id="plbase1" disabled="true">
+						</div>
+						<div class="ui-block-b">
+							<label for="plevol1">PL evoluzione:</label>
+							<input type="number" name="plevol1" id="plevol1" disabled="true">
+						</div>
+						<div class="ui-block-a">
+							<label for="moltip1">Moltiplicatore:</label>
+							<input type="number" name="moltip1" id="moltip1" disabled="true">
+						</div>
+						<div class="ui-block-b">
+    						<label for="pl1">PL iniziali:</label>
+							<input type="number" name="pl1" id="pl1">
+						</div>
+					</div>
+					<label for="livelli1">Numero livelli</label>
+    				<div data-role="controlgroup" data-type="horizontal" id="livgroup1">
+						<div class="ui-btn ui-icon-minus ui-btn-icon-notext ui-first-child ui-alt-icon ui-nodisc-icon" id="subliv1">&nbsp;</div>
+						<div class="ui-input-text ui-shadow-inset ui-btn contatore">
+							<input type="number" data-role="spinbox" name="livelli1" id="livelli1" data-options="{&quot;type&quot;:&quot;horizontal&quot;}" value="0" min="0" max="100" disabled="true">
+						</div>
+        				<!-- <input type="number" name="livelli" id="livelli" data-wrapper-class="controlgroup-textinput ui-btn"> -->
+        				<div class="ui-btn ui-icon-plus ui-btn-icon-notext ui-last-child ui-alt-icon ui-nodisc-icon" id="addliv1">&nbsp;</div>
+    				</div>
+
+					<h1>Punti lotta finali</h1>
+					<div class="ui-grid-a risultato">
+						<div class="ui-block-a">
+							<label for="evopot1">Evoluzione - Potenziamento:</label>
+							<input type="number" name="evopot1" id="evopot1" disabled="true">
+						</div>
+						<div class="ui-block-b">
+							<label for="potevo1">Potenziamento - Evoluzione:</label>
+							<input type="number" name="potevo1" id="potevo1" disabled="true">
+						</div>
+					</div>
+
+        		</form>
+
+			</div> <!-- fine data-role="main" -->
+
+			<div data-role="footer">
+                <h1>Praise the Sun!</h1>
+            </div>
+        </div> <!-- fine una evoluzione -->
+
+<!-- ===================================================================================================== -->
+
+		<div data-role="page" id="dueevol">
+            <!-- <div data-role="header" data-position="fixed"> -->
+			<div data-role="header">
+                <h1>Due evoluzioni</h1>
+				<div data-role="navbar">
+    				<ul>
+    					<li><a href="#home" data-icon="home" class="ui-alt-icon ui-nodisc-icon">Pokemon Base</a></li>
+    					<li><a href="#unaevol" data-icon="navigation" class="ui-alt-icon ui-nodisc-icon">Una evoluzione</a></li>
+    				</ul>
+				</div>
+            </div>
+
+			<div data-role="main" class="ui-content">
+                <img class="logo" src="img/pkgo-logo.png">
+
+				<form id="select-due" method="post">
+					<div class="ui-field-contain ui-alt-icon ui-nodisc-icon">
+						<select name="pokemon2" id="pokeselect2">
+							<option value="0">-- Seleziona un animaletto --</option>
+							<!-- qui viene popolato in base ai dati del db -->
+						</select>
+					</div>
+				</form>
+
+				<form id="dati2" method="post">
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="plbase2">PL base:</label>
+							<input type="number" name="plbase2" id="plbase2" disabled="true">
+						</div>
+						<div class="ui-block-b">
+							<label for="plevol2">PL evoluzione:</label>
+							<input type="number" name="plevol2" id="plevol2" disabled="true">
+						</div>
+						<div class="ui-block-a">
+							<label for="moltip2">Moltiplicatore:</label>
+							<input type="number" name="moltip2" id="moltip2" disabled="true">
+						</div>
+						<div class="ui-block-b">
+    						<label for="pl2">PL iniziali:</label>
+							<input type="number" name="pl2" id="pl2">
+						</div>
+					</div>
+					<label for="livelli2">Numero livelli</label>
+    				<div data-role="controlgroup" data-type="horizontal" id="livgroup2">
+						<div class="ui-btn ui-icon-minus ui-btn-icon-notext ui-first-child ui-alt-icon ui-nodisc-icon" id="subliv2">&nbsp;</div>
+						<div class="ui-input-text ui-shadow-inset ui-btn contatore">
+							<input type="number" data-role="spinbox" name="livelli2" id="livelli2" data-options="{&quot;type&quot;:&quot;horizontal&quot;}" value="0" min="0" max="100" disabled="true">
+						</div>
+        				<!-- <input type="number" name="livelli" id="livelli" data-wrapper-class="controlgroup-textinput ui-btn"> -->
+        				<div class="ui-btn ui-icon-plus ui-btn-icon-notext ui-last-child ui-alt-icon ui-nodisc-icon" id="addliv2">&nbsp;</div>
+    				</div>
+
+					<h1>Punti lotta finali</h1>
+					<div class="ui-grid-a risultato">
+						<div class="ui-block-a">
+							<label for="evopot2">Evoluzione -> Potenziamento:</label>
+							<input type="number" name="evopot2" id="evopot2" disabled="true">
+						</div>
+						<div class="ui-block-b">
+							<label for="potevo2">Potenziamento -> Evoluzione:</label>
+							<input type="number" name="potevo2" id="potevo2" disabled="true">
+						</div>
+					</div>
+
+        		</form>
+
+
+			</div> <!-- fine data-role="main" -->
+
+			<div data-role="footer">
+                <h1>Praise the Sun!</h1>
+            </div>
+        </div> <!-- fine due evoluzioni -->
+
+	</div> <!-- fine app -->
+
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+
+</html>

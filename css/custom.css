@@ -1,0 +1,65 @@
+/*
+ *
+ custom style
+ *
+ */
+
+.logo{
+	width: 80%;
+}
+
+.ui-content{
+	text-align: center;
+}
+
+.footer-icon{
+	position: relative;
+}
+
+/* form con i dati */
+#dati input,
+#dati1 input,
+#dati2 input{
+	text-align: center;
+}
+
+.ui-grid-a div.ui-input-text,
+.ui-grid-b div.ui-input-text{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#livgroup div.ui-input-text,
+#livgroup1 div.ui-input-text,
+#livgroup2 div.ui-input-text{
+	/*width: 20%;*/
+	margin: 0;
+}
+
+.ui-grid-a div.ui-input-text.ui-state-disabled,
+.ui-grid-b div.ui-input-text.ui-state-disabled {
+    opacity:1;
+	background-color: #ff9999;
+	/*font-weight: 700;*/
+}
+
+.risultato div.ui-input-text.ui-state-disabled{
+	opacity:1;
+	background-color: #ff9999;
+}
+
+.ui-controlgroup div.ui-input-text.ui-state-disabled{
+	opacity: 1;
+	background-color: #ffd29e;
+	font-size: 1.8 em;
+}
+
+.contatore{
+	padding: 0;
+}
+
+.contatore .ui-input-text.ui-body-inherit.ui-corner-all.ui-state-disabled{
+	padding: 2px 0px 1px;
+	border: none;
+	font-size: 18px;
+}
